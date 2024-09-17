@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COP-16 Biodiversity</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <nav class="navbar"></nav>
+        <ul>
+            <li><a href="/Page/home.html">Home</a></li>
+            <li><a href="#about">Sobre el Juego</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="game-container">
+        <img src="https://oficinavirtualderadicacion.sena.edu.co/oficinavirtual/Resources/logoSenaNaranja.png"
+            alt="Logo SENA" class="sena-logo">
+        <h1>Hanged Man: Biodiversity COP-16</h1>
+        <div id="hangman">
+            <svg viewbox="0 0 200 200">
+                <line x1="20" y1="180" x2="100" y2="180" stroke="black" stroke-width="4"></line>
+                <line x1="60" y1="20" x2="60" y2="180" stroke="black" stroke-width="4"></line>
+                <line x1="60" y1="20" x2="140" y2="20" stroke="black" stroke-width="4"></line>
+                <line x1="140" y1="20" x2="140" y2="40" stroke="black" stroke-width="4"></line>
+                <circle id="head" cx="140" cy="60" r="20" fill="none" stroke="black" stroke-width="4"
+                    visibility="hidden"></circle>
+                <line id="body" x1="140" y1="80" x2="140" y2="120" stroke="black" stroke-width="4" visibility="hidden">
+                </line>
+                <line id="leftArm" x1="140" y1="90" x2="120" y2="100" stroke="black" stroke-width="4"
+                    visibility="hidden"></line>
+                <line id="rightArm" x1="140" y1="90" x2="160" y2="100" stroke="black" stroke-width="4"
+                    visibility="hidden"></line>
+                <line id="leftLeg" x1="140" y1="120" x2="120" y2="140" stroke="black" stroke-width="4"
+                    visibility="hidden"></line>
+                <line id="rightLeg" x1="140" y1="120" x2="160" y2="140" stroke="black" stroke-width="4"
+                    visibility="hidden"></line>
+            </svg>
+        </div>
+        <div id="word-display"></div>
+        <input type="text" id="guess-input" maxlength="1">
+        <button id="guess-button">Guess</button>
+        <div id="message"></div>
+        <div id="tries-left"></div>
+    </div>
+    <canvas id="confetti"></canvas>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

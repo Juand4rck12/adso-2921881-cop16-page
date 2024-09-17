@@ -1,0 +1,154 @@
+:root {
+    --primary-color: #39A900;    /* SENA Green */
+    --secondary-color: #00324D;  /* Dark Blue */
+    --background-color: #F5F5F5; /* Light Gray */
+    --text-color: #333333;       /* Dark Gray */
+    --accent-color: #FF6B6B;     /* Coral */
+    --white: #FFFFFF;
+    --card-color: #4caf50;       /* Green for cards */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #000000;
+}
+
+.navbar {
+    background-color: var(--white);
+    padding: 1rem 5%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: var(--primary-color);
+}
+
+.game-container {
+    text-align: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+    max-width: 90%;
+    width: 400px;
+    position: relative;
+}
+
+.sena-logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 80px;
+    height: auto;
+    filter: hue-rotate(0) saturate(0);
+}
+
+h1 {
+    color: #15ff00;
+    font-size: 1.5rem;
+    margin-top: 60px;
+}
+
+#hangman {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+}
+
+#word-display {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    letter-spacing: 3px;
+    word-break: break-all;
+}
+
+#guess-input {
+    font-size: 1.2rem;
+    padding: 5px;
+    width: 30px;
+    text-align: center;
+}
+
+#guess-button {
+    font-size: 1.2rem;
+    padding: 5px 15px;
+    background-color: #3498db;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#guess-button:hover {
+    background-color: #2980b9;
+}
+
+#message {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#tries-left {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+#confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    #hangman {
+        width: 150px;
+        height: 150px;
+    }
+
+    #word-display {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
+    #guess-input,
+    #guess-button {
+        font-size: 1rem;
+    }
+}
