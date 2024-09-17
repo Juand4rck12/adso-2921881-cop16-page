@@ -5,40 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENA Students for COP16 Colombia 2024</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="/images/Sena_Colombia_logo.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" alt="SENA Logo" class="sena-logo">
-        <h1>SENA Students for COP16 Colombia 2024</h1>
-        <p>Software Analysis and Development - Class 2921881</p>
+        <nav>
+            <img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" alt="SENA Logo" class="sena-logo">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>SENA Students for COP16 Colombia 2024</h1>
+            <p>Software Analysis and Development - Class 2921881</p>
+            <a href="#projects" class="cta-button">Explore Our Projects</a>
+        </div>
     </header>
 
-    <div class="container">
-        <section class="intro">
+    <main class="container">
+        <section id="about" class="intro">
             <h2>Our Contribution to COP16 Colombia 2024</h2>
             <p>As students of Software Analysis and Development at SENA, we're proud to present our innovative projects aimed at promoting environmental awareness and sustainability for COP16 Colombia 2024.</p>
         </section>
 
-        <section class="projects">
-            <div class="project-card">
-                <h3>Smart Plant Watering System</h3>
-                <p>An Arduino-based system that detects soil moisture levels and automatically waters plants when needed, promoting water conservation and optimal plant growth.</p>
-                <a href="#" class="cta-button">Learn More</a>
-            </div>
-            <div class="project-card">
-                <h3>Eco-Memory Game</h3>
-                <p>An interactive web-based memory game that educates players about environmental conservation. Each matched pair reveals an eco-friendly tip, making learning fun and engaging.</p>
-                <a href="#" class="cta-button">Play Now</a>
-            </div>
-            <div class="project-card">
-                <h3>Environmental Trivia Challenge</h3>
-                <p>Test your knowledge about climate change, sustainability, and environmental issues with our engaging trivia game, designed to raise awareness and educate players.</p>
-                <a href="#" class="cta-button">Take the Quiz</a>
+        <section id="projects" class="projects">
+            <h2>Our Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-icon">🌱</div>
+                    <h3>Smart Plant Watering System</h3>
+                    <p>An Arduino-based system that detects soil moisture levels and automatically waters plants when needed, promoting water conservation and optimal plant growth.</p>
+                    <a href="#" class="cta-button">Learn More</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">🧠</div>
+                    <h3>Eco-Memory Game</h3>
+                    <p>An interactive web-based memory game that educates players about environmental conservation. Each matched pair reveals an eco-friendly tip, making learning fun and engaging.</p>
+                    <a href="/Games/memoria.html" class="cta-button">Play Now</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">❓</div>
+                    <h3>Environmental Trivia Challenge</h3>
+                    <p>Test your knowledge about climate change, sustainability, and environmental issues with our engaging trivia game, designed to raise awareness and educate players.</p>
+                    <a href="#" class="cta-button">Take the Quiz</a>
+                </div>
             </div>
         </section>
-    </div>
+    </main>
 
     <footer>
         <p>&copy; 2024 SENA Students - Software Analysis and Development (Class 2921881). All rights reserved.</p>
