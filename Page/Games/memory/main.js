@@ -40,15 +40,15 @@ let attempts = 0;
 let timer;
 let seconds = 0;
 
-function shuffleCards(array) {
+const shuffleCards = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-}
+};
 
-function createBoard() {
+const createBoard = () => {
     const gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = '';
     shuffleCards(cards).forEach((card, index) => {
@@ -77,9 +77,9 @@ function createBoard() {
         cardElement.addEventListener('click', flipCard);
         gameContainer.appendChild(cardElement);
     });
-}
+};
 
-function flipCard() {
+const flipCard = function() {
     if (selectedCards.length < 2 && !this.classList.contains('flipped')) {
         this.classList.add('flipped');
         selectedCards.push(this);
@@ -87,12 +87,12 @@ function flipCard() {
         if (selectedCards.length === 2) {
             attempts++;
             updateScore();
-            setTimeout(checkMatch, 1000);
+            setTimeout(checkMatch, 600); // Reduce the timeout to 600ms for a more responsive experience
         }
     }
-}
+};
 
-function checkMatch() {
+const checkMatch = () => {
     const [card1, card2] = selectedCards;
     if (card1.dataset.image === card2.dataset.image) {
         card1.removeEventListener('click', flipCard);
@@ -110,24 +110,24 @@ function checkMatch() {
         card2.classList.remove('flipped');
     }
     selectedCards = [];
-}
+};
 
-function showTip(imageSrc) {
+const showTip = (imageSrc) => {
     const tip = images.find(img => img.src === imageSrc).tip;
     document.getElementById('tipText').textContent = tip;
     document.getElementById('tipModal').style.display = 'block';
-}
+};
 
-function updateScore() {
+const updateScore = () => {
     document.getElementById('score').textContent = `Intentos: ${attempts}`;
-}
+};
 
-function updateTimer() {
+const updateTimer = () => {
     seconds++;
     document.getElementById('timer').textContent = `Tiempo: ${seconds}s`;
-}
+};
 
-function restartGame() {
+const restartGame = () => {
     clearInterval(timer);
     seconds = 0;
     selectedCards = [];
@@ -138,9 +138,9 @@ function restartGame() {
     setDifficulty();
     createBoard();
     timer = setInterval(updateTimer, 1000);
-}
+};
 
-function setDifficulty() {
+const setDifficulty = () => {
     const level = document.getElementById('level').value;
     switch (level) {
         case 'easy':
@@ -156,7 +156,7 @@ function setDifficulty() {
             document.getElementById('game-container').style.maxWidth = '800px';
             break;
     }
-}
+};
 
 document.getElementById('restart').addEventListener('click', restartGame);
 document.getElementById('level').addEventListener('change', restartGame);
