@@ -1,16 +1,30 @@
 :root {
-    --primary-color: #39A900;    /* SENA Green */
-    --secondary-color: #00324D;  /* Dark Blue */
-    --background-color: #F5F5F5; /* Light Gray */
-    --text-color: #333333;       /* Dark Gray */
-    --accent-color: #FF6B6B;     /* Coral */
+    --primary-color: #39A900;
+    --secondary-color: #00324D;
+    --background-color: #F5F5F5;
+    --text-color: #333333;
+    --accent-color: #1557e7;
     --white: #FFFFFF;
+    --card-bg: #FFFFFF;
+
+    --dark-primary-color: #4CAF50;
+    --dark-secondary-color: #2196F3;
+    --dark-background-color: #121212;
+    --dark-text-color: #E0E0E0;
+    --dark-accent-color: #FFA000;
+    --dark-white: #1E1E1E;
+    --dark-card-bg: #252525;
+
+    /* Optimization for theme transition */
+    --transition-duration: 0.8s;
+    --shadow-elevation: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -18,13 +32,27 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
 }
 
+body.dark-mode {
+    --primary-color: var(--dark-primary-color);
+    --secondary-color: var(--dark-secondary-color);
+    --background-color: var(--dark-background-color);
+    --text-color: var(--dark-text-color);
+    --accent-color: var(--dark-accent-color);
+    --white: var(--dark-white);
+    --card-bg: var(--dark-card-bg);
+}
+
+/* Optimization: Reduce shadow elevation for better performance */
 header {
     background-color: var(--white);
     color: var(--text-color);
     position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-elevation);
+    z-index: 1000;
+    transition: box-shadow var(--transition-duration) ease;
 }
 
 nav {
@@ -37,6 +65,7 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
+    flex-wrap: wrap; /* Added for better responsiveness */
 }
 
 nav ul li {
@@ -47,8 +76,8 @@ nav ul li a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
+    font-size: 1.2rem;
+    transition: color var(--transition-duration) ease;
 }
 
 nav ul li a:hover {
@@ -58,6 +87,7 @@ nav ul li a:hover {
 .sena-logo {
     width: 80px;
     height: auto;
+    transition: transform var(--transition-duration) ease;
 }
 
 .hero {
@@ -65,12 +95,18 @@ nav ul li a:hover {
     padding: 5rem 1rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-size var(--transition-duration) ease;
 }
 
 h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-duration) ease;
 }
 
 .container {
@@ -82,6 +118,8 @@ h1 {
 .intro {
     text-align: center;
     margin-bottom: 4rem;
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease;
 }
 
 h2 {
@@ -102,30 +140,47 @@ h2 {
 }
 
 .project-card {
-    background-color: var(--white);
+    background-color: var(--card-bg);
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-elevation);
     padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease, color var(--transition-duration) ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    opacity: 0;
+}
+
+.project-card.visible {
+    opacity: 1;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background-color: var(--accent-color);
+    color: var(--white);
 }
 
 .project-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
+    transition: transform var(--transition-duration) ease;
+}
+
+.project-card:hover .project-icon {
+    transform: rotate(360deg);
 }
 
 .project-card h3 {
     color: var(--primary-color);
     margin-bottom: 1rem;
+    transition: color var(--transition-duration) ease;
+}
+
+.project-card:hover h3 {
+    color: var(--white);
 }
 
 .cta-button {
@@ -136,7 +191,7 @@ h2 {
     border-radius: 5px;
     text-decoration: none;
     margin-top: 1rem;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--transition-duration) ease, transform var(--transition-duration) ease, color var(--transition-duration) ease;
     font-weight: 500;
 }
 
@@ -145,22 +200,80 @@ h2 {
     transform: scale(1.05);
 }
 
+.project-card:hover .cta-button {
+    background-color: var(--white);
+    color: var(--accent-color);
+}
+
 footer {
     background-color: var(--secondary-color);
     color: var(--white);
     text-align: center;
     padding: 1.5rem 0;
     margin-top: 3rem;
+    transition: background-color var(--transition-duration) ease;
 }
 
+#theme-toggle {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-duration) ease, transform var(--transition-duration) ease, color var(--transition-duration) ease, border-color var(--transition-duration) ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+body.dark-mode #theme-toggle {
+    border-color: var(--dark-accent-color);
+    color: var(--dark-accent-color);
+}
+
+body.dark-mode #theme-toggle:hover {
+    background-color: var(--dark-accent-color);
+    color: var(--dark-background-color);
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+}
+
+.fade-in.visible,
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
     nav {
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
     }
 
     nav ul {
+        order: 3;
+        width: 100%;
         margin-top: 1rem;
+        justify-content: center;
     }
 
     nav ul li {
