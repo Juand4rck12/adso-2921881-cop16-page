@@ -38,132 +38,155 @@ let selectedCards = [];
 let matchedPairs = 0;
 let attempts = 0;
 let timer;
-let seconds = 0;
+let timeElapsed = 0;
 
-const shuffleCards = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+const levelConfig = {
+    easy: 16,
+    medium: 24,
+    hard: 32
 };
 
-const createBoard = () => {
-    const gameContainer = document.getElementById('game-container');
+const gameContainer = document.getElementById('game-container');
+const scoreElement = document.getElementById('score');
+const timerElement = document.getElementById('timer');
+const restartButton = document.getElementById('restart');
+const difficultySelect = document.getElementById('level');
+const tipPopover = document.getElementById('tipPopover');
+const closeBtn = tipPopover.querySelector('.close-btn');
+let overlay;
+
+function createOverlay() {
+    overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
+}
+
+createOverlay();
+
+function showTipPopover(card) {
+    const cardIndex = parseInt(card.getAttribute('data-id'));
+    const cardData = cards[cardIndex];
+    
+    const tipImage = document.getElementById('tipImage');
+    const tipText = document.getElementById('tipText');
+    
+    tipImage.src = cardData.src;
+    tipText.textContent = cardData.tip;
+    
+    tipPopover.style.display = 'block';
+    overlay.style.display = 'block';
+}
+
+function closeTipPopover() {
+    tipPopover.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+closeBtn.addEventListener('click', closeTipPopover);
+overlay.addEventListener('click', closeTipPopover);
+
+const createCards = (level) => {
+    const cardCount = levelConfig[level];
+    const shuffledImages = shuffleCards(images).slice(0, cardCount / 2);
+    cards = [...shuffledImages, ...shuffledImages];
+    cards = shuffleCards(cards);
+    renderCards();
+};
+
+const renderCards = () => {
     gameContainer.innerHTML = '';
-    shuffleCards(cards).forEach((card, index) => {
+    cards.forEach((image, index) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        cardElement.dataset.id = index;
-        cardElement.dataset.image = card.src;
-
-        const cardInner = document.createElement('div');
-        cardInner.classList.add('card-inner');
-
-        const cardFront = document.createElement('div');
-        cardFront.classList.add('card-front');
-
-        const cardBack = document.createElement('div');
-        cardBack.classList.add('card-back');
-
-        const img = document.createElement('img');
-        img.src = card.src;
-        cardBack.appendChild(img);
-
-        cardInner.appendChild(cardFront);
-        cardInner.appendChild(cardBack);
-        cardElement.appendChild(cardInner);
-
-        cardElement.addEventListener('click', flipCard);
+        cardElement.setAttribute('data-id', index);
+        cardElement.innerHTML = `
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back"><img src="${image.src}" alt="Card Image"></div>
+            </div>`;
+        cardElement.addEventListener('click', () => handleCardClick(cardElement, index));
         gameContainer.appendChild(cardElement);
     });
 };
 
-const flipCard = function() {
-    if (selectedCards.length < 2 && !this.classList.contains('flipped')) {
-        this.classList.add('flipped');
-        selectedCards.push(this);
+const handleCardClick = (cardElement, index) => {
+    if (selectedCards.length < 2 && !cardElement.classList.contains('flipped')) {
+        cardElement.classList.add('flipped');
+        selectedCards.push({ element: cardElement, index });
 
         if (selectedCards.length === 2) {
             attempts++;
-            updateScore();
-            setTimeout(checkMatch, 600); // Reduce the timeout to 600ms for a more responsive experience
+            scoreElement.innerText = `Intentos: ${attempts}`;
+            setTimeout(checkForMatch, 1000);
         }
     }
 };
 
-const checkMatch = () => {
-    const [card1, card2] = selectedCards;
-    if (card1.dataset.image === card2.dataset.image) {
-        card1.removeEventListener('click', flipCard);
-        card2.removeEventListener('click', flipCard);
+const checkForMatch = () => {
+    const [firstCard, secondCard] = selectedCards;
+    const firstImage = cards[firstCard.index].src;
+    const secondImage = cards[secondCard.index].src;
+
+    if (firstImage === secondImage) {
         matchedPairs++;
-        showTip(card1.dataset.image);
+        setTimeout(() => showTipPopover(firstCard.element), 500);
+        
         if (matchedPairs === cards.length / 2) {
             clearInterval(timer);
             setTimeout(() => {
-                alert(`¡Felicidades! Has completado el juego en ${seconds} segundos con ${attempts} intentos.`);
-            }, 500);
+                alert('¡Felicidades! Has encontrado todos los pares.');
+            }, 1000);
         }
     } else {
-        card1.classList.remove('flipped');
-        card2.classList.remove('flipped');
+        setTimeout(() => {
+            firstCard.element.classList.remove('flipped');
+            secondCard.element.classList.remove('flipped');
+        }, 1000);
     }
     selectedCards = [];
 };
 
-const showTip = (imageSrc) => {
-    const tip = images.find(img => img.src === imageSrc).tip;
-    document.getElementById('tipText').textContent = tip;
-    document.getElementById('tipModal').style.display = 'block';
+const shuffleCards = (array) => {
+    return array.sort(() => Math.random() - 0.5);
 };
 
-const updateScore = () => {
-    document.getElementById('score').textContent = `Intentos: ${attempts}`;
+const startGame = () => {
+    closeTipPopover();
+    const selectedLevel = difficultySelect.value;
+    createCards(selectedLevel);
+    resetGame();
 };
 
-const updateTimer = () => {
-    seconds++;
-    document.getElementById('timer').textContent = `Tiempo: ${seconds}s`;
-};
-
-const restartGame = () => {
-    clearInterval(timer);
-    seconds = 0;
+const resetGame = () => {
     selectedCards = [];
     matchedPairs = 0;
     attempts = 0;
-    updateScore();
-    document.getElementById('timer').textContent = 'Tiempo: 0s';
-    setDifficulty();
-    createBoard();
-    timer = setInterval(updateTimer, 1000);
+    timeElapsed = 0;
+    scoreElement.innerText = 'Intentos: 0';
+    timerElement.innerText = 'Tiempo: 0s';
+    clearInterval(timer);
+    timer = setInterval(() => {
+        timeElapsed++;
+        timerElement.innerText = `Tiempo: ${timeElapsed}s`;
+    }, 1000);
 };
 
-const setDifficulty = () => {
-    const level = document.getElementById('level').value;
-    switch (level) {
-        case 'easy':
-            cards = [...images, ...images];
-            document.getElementById('game-container').style.maxWidth = '600px';
-            break;
-        case 'medium':
-            cards = [...images, ...images, ...images.slice(0, 4), ...images.slice(0, 4)];
-            document.getElementById('game-container').style.maxWidth = '700px';
-            break;
-        case 'hard':
-            cards = [...images, ...images, ...images, ...images];
-            document.getElementById('game-container').style.maxWidth = '800px';
-            break;
+restartButton.addEventListener('click', startGame);
+difficultySelect.addEventListener('change', startGame);
+
+const adjustGridColumns = () => {
+    const width = window.innerWidth;
+    if (width <= 480) {
+        gameContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    } else if (width <= 768) {
+        gameContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    } else {
+        gameContainer.style.gridTemplateColumns = 'repeat(auto-fit, minmax(120px, 1fr))';
     }
 };
 
-document.getElementById('restart').addEventListener('click', restartGame);
-document.getElementById('level').addEventListener('change', restartGame);
-document.getElementById('closeTip').addEventListener('click', () => {
-    document.getElementById('tipModal').style.display = 'none';
-});
-
-setDifficulty();
-createBoard();
-timer = setInterval(updateTimer, 1000);
+window.addEventListener('resize', adjustGridColumns);
+window.onload = () => {
+    startGame();
+    adjustGridColumns();
+};

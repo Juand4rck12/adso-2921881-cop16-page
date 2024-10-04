@@ -1,13 +1,17 @@
 :root {
-    --primary-color: #39A900;  /* SENA Green */
-    --secondary-color: #00324D;  /* Dark Blue */
-    --background-color: #F5F5F5; /* Light Gray */
-    --text-color: #333333;  /* Dark Gray */
-    --accent-color: #FF6B6B;  /* Coral */
+    --primary-color: #39A900;
+    --secondary-color: #00324D;
+    --background-color: #F5F5F5;
+    --text-color: #333333;
+    --accent-color: #FF6B6B;
     --white: #FFFFFF;
-    --card-color: #4caf50;  /* Green for cards */
+    --card-color: #4caf50;
+    --shadow-light: 0 2px 5px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 8px rgba(0,0,0,0.1);
+    --shadow-heavy: 0 4px 20px rgba(0,0,0,0.2);
 }
 
+/* Base styles */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background-color);
@@ -19,10 +23,11 @@ body {
     flex-direction: column;
 }
 
+/* Navigation */
 .navbar {
     background-color: var(--white);
     padding: 1rem 5%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-light);
 }
 
 .navbar ul {
@@ -49,6 +54,7 @@ body {
     color: var(--primary-color);
 }
 
+/* Content layout */
 .content-wrapper {
     flex-grow: 1;
     display: flex;
@@ -73,12 +79,13 @@ h1 {
     text-align: center;
 }
 
+/* Game container and cards */
 #game-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 1rem;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 2rem auto;
 }
 
@@ -87,6 +94,7 @@ h1 {
     perspective: 1000px;
     cursor: pointer;
     transition: transform 0.6s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .card-inner {
@@ -109,7 +117,7 @@ h1 {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-medium);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,6 +137,7 @@ h1 {
     max-height: 80%;
 }
 
+/* UI Elements */
 #score,
 #timer {
     font-size: 1.2rem;
@@ -163,42 +172,74 @@ select {
     border: 1px solid var(--secondary-color);
 }
 
-.modal {
+/* Popover styles */
+.popover {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
     background-color: var(--white);
-    margin: 15% auto;
-    padding: 2rem;
-    border: 1px solid var(--secondary-color);
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-heavy);
+    animation: popoverIn 0.3s ease-out;
 }
 
-#tipText {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+.popover-content {
+    padding: 20px;
 }
 
-.stats {
+.popover-header {
     display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
+.popover-header h3 {
+    margin: 0;
+    color: var(--secondary-color);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.popover-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popover-body img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.popover-body p {
+    text-align: center;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+/* Footer */
 footer {
     background-color: var(--secondary-color);
     color: var(--white);
@@ -207,94 +248,35 @@ footer {
     margin-top: auto;
 }
 
-/* Animaciones y transiciones */
-
+/* Animations */
 @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popoverIn {
     from {
         opacity: 0;
+        transform: translate(-50%, -60%);
     }
     to {
         opacity: 1;
+        transform: translate(-50%, -50%);
     }
 }
 
-.card {
-    aspect-ratio: 1 / 1;
-    perspective: 1000px;
-    cursor: pointer;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.card-inner {
-    transition: transform 0.6s ease-in-out;
-}
-
-button {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-}
-
-/* Modal Improvements */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.modal-content {
-    background-color: var(--white);
-    margin: 15% auto;
-    padding: 2rem;
-    border: 1px solid var(--secondary-color);
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-
+/* Media Queries */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
+    h1 { font-size: 2rem; }
     .navbar {
         padding: 0.5rem 2%;
     }
-
     .navbar a {
         font-size: 1rem;
         padding: 8px 12px;
     }
-
-    .content-wrapper {
-        padding: 1rem;
-    }
-
-    #game-container {
-        gap: 0.5rem;
-    }
-
+    .content-wrapper { padding: 1rem; }
+    #game-container { gap: 0.5rem; }
     button {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
@@ -302,20 +284,20 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    .navbar li {
-        margin: 0 8px;
-    }
-
-    .sena-logo {
-        width: 60px;
-    }
-
+    h1 { font-size: 1.8rem; }
+    .navbar li { margin: 0 8px; }
+    .sena-logo { width: 60px; }
     button {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
+    }
+    .popover {
+        width: 95%;
+        max-width: none;
+    }
+    .popover-content { padding: 15px; }
+    .popover-body img {
+        width: 60px;
+        height: 60px;
     }
 }
