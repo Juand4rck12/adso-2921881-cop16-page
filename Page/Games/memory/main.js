@@ -1,192 +1,138 @@
-const images = [
+const environmentalPairs = [
+    '🌱', '🌱', '🌳', '🌳', '♻️', '♻️', '💧', '💧',
+    '🌞', '🌞', '🍃', '🍃', '🌍', '🌍', '🔋', '🔋'
+];
+
+const environmentalMessages = [
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/2719/2719880.png',
-        tip: 'Planta un árbol en tu comunidad. Un solo árbol puede absorber hasta 22 kg de CO2 al año y proporcionar oxígeno para 2 personas.'
+        title: "Plantación de Árboles",
+        content: "Un solo árbol puede absorber hasta 22 kg de CO2 al año y proporcionar oxígeno para 2 personas. La reforestación urbana reduce la temperatura local hasta 2°C y aumenta la biodiversidad en un 30%."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/869/869796.png',
-        tip: 'Opta por energías renovables. Instalar paneles solares puede reducir tu huella de carbono hasta en un 80% y ahorrar en facturas de electricidad.'
+        title: "Energías Renovables",
+        content: "Instalar paneles solares puede reducir tu huella de carbono hasta en un 80%. Una casa con energía solar evita la emisión de 3-4 toneladas de CO2 anualmente, equivalente a plantar 100 árboles."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/1598/1598402.png',
-        tip: 'Recicla correctamente. Separa tus residuos en orgánicos, plásticos, papel y vidrio. Reciclar una tonelada de papel salva 17 árboles.'
+        title: "Reciclaje Efectivo",
+        content: "Reciclar una tonelada de papel salva 17 árboles y 26,000 litros de agua. Separar correctamente los residuos puede reducir hasta un 80% la basura que llega a los vertederos. Un teléfono móvil reciclado ahorra metales equivalentes a 24 kg de oro."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/998/998507.png',
-        tip: 'Conserva el agua. Cierra el grifo mientras te cepillas los dientes y ahorra hasta 12 litros por minuto. Repara las fugas: una gota por segundo desperdicia 30 litros al día.'
+        title: "Conservación del Agua",
+        content: "Cerrar el grifo mientras te cepillas los dientes ahorra hasta 12 litros por minuto. Una fuga de una gota por segundo desperdicia 30 litros al día. Usar un cabezal de ducha eficiente puede ahorrar 11,000 litros de agua por persona al año."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/4014/4014344.png',
-        tip: 'Consume productos locales y de temporada. Reduces las emisiones asociadas al transporte y apoyas la economía local. Los alimentos locales son hasta un 17% más frescos.'
+        title: "Consumo Local y Sostenible",
+        content: "Los alimentos locales son hasta un 17% más frescos y reducen las emisiones de transporte. Comprar productos de temporada reduce la huella de carbono en un 10% y apoya a los agricultores locales, fortaleciendo la economía de la comunidad."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/6134/6134700.png',
-        tip: 'Cambia a bombillas LED. Usan hasta un 75% menos de energía y duran 25 veces más que las incandescentes. Puedes ahorrar $75 al año por bombilla.'
+        title: "Eficiencia Energética",
+        content: "Las bombillas LED usan hasta un 75% menos de energía y duran 25 veces más que las incandescentes. Puedes ahorrar $75 al año por bombilla. Configurar el termostato 1°C más bajo en invierno reduce el consumo de energía en un 10%."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/4357/4357574.png',
-        tip: 'Usa la bicicleta para trayectos cortos. Reducirás emisiones y mejorarás tu salud. Andar en bicicleta 10 km al día ahorra 1.5 toneladas de CO2 al año.'
+        title: "Transporte Sostenible",
+        content: "Andar en bicicleta 10 km al día ahorra 1.5 toneladas de CO2 al año. Usar transporte público puede reducir tu huella de carbono en 2.6 toneladas anuales. Compartir coche al trabajo disminuye las emisiones y el tráfico en hasta un 20%."
     },
     {
-        src: 'https://cdn-icons-png.flaticon.com/512/1046/1046820.png',
-        tip: 'Reduce tu consumo de carne. La producción de carne es responsable del 14.5% de las emisiones de gases de efecto invernadero. Un día sin carne a la semana puede reducir tu huella de carbono en un 8%.'
+        title: "Alimentación Consciente",
+        content: "Reducir el consumo de carne un día a la semana puede disminuir tu huella de carbono en un 8%. La producción de carne utiliza 20 veces más tierra y 6 veces más agua que las proteínas vegetales. Una dieta basada en plantas puede ahorrar 1,100 litros de agua por día."
     }
 ];
 
-let cards = [];
-let selectedCards = [];
+let flippedCards = [];
 let matchedPairs = 0;
-let attempts = 0;
-let timer;
-let timeElapsed = 0;
 
-const levelConfig = {
-    easy: 16,
-    medium: 24,
-    hard: 32
-};
-
-const gameContainer = document.getElementById('game-container');
-const scoreElement = document.getElementById('score');
-const timerElement = document.getElementById('timer');
-const restartButton = document.getElementById('restart');
-const difficultySelect = document.getElementById('level');
-const tipPopover = document.getElementById('tipPopover');
-const closeBtn = tipPopover.querySelector('.close-btn');
-let overlay;
-
-function createOverlay() {
-    overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    document.body.appendChild(overlay);
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
-createOverlay();
-
-function showTipPopover(card) {
-    const cardIndex = parseInt(card.getAttribute('data-id'));
-    const cardData = cards[cardIndex];
+function createBoard() {
+    const gameBoard = document.getElementById('game-board');
+    const shuffledPairs = shuffleArray([...environmentalPairs]);
     
-    const tipImage = document.getElementById('tipImage');
-    const tipText = document.getElementById('tipText');
-    
-    tipImage.src = cardData.src;
-    tipText.textContent = cardData.tip;
-    
-    tipPopover.style.display = 'block';
-    overlay.style.display = 'block';
-}
-
-function closeTipPopover() {
-    tipPopover.style.display = 'none';
-    overlay.style.display = 'none';
-}
-
-closeBtn.addEventListener('click', closeTipPopover);
-overlay.addEventListener('click', closeTipPopover);
-
-const createCards = (level) => {
-    const cardCount = levelConfig[level];
-    const shuffledImages = shuffleCards(images).slice(0, cardCount / 2);
-    cards = [...shuffledImages, ...shuffledImages];
-    cards = shuffleCards(cards);
-    renderCards();
-};
-
-const renderCards = () => {
-    gameContainer.innerHTML = '';
-    cards.forEach((image, index) => {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
-        cardElement.setAttribute('data-id', index);
-        cardElement.innerHTML = `
-            <div class="card-inner">
-                <div class="card-front"></div>
-                <div class="card-back"><img src="${image.src}" alt="Card Image"></div>
-            </div>`;
-        cardElement.addEventListener('click', () => handleCardClick(cardElement, index));
-        gameContainer.appendChild(cardElement);
+    gameBoard.innerHTML = '';
+    shuffledPairs.forEach((symbol, index) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.symbol = symbol;
+        card.dataset.index = index;
+        card.addEventListener('click', flipCard);
+        gameBoard.appendChild(card);
     });
-};
+}
 
-const handleCardClick = (cardElement, index) => {
-    if (selectedCards.length < 2 && !cardElement.classList.contains('flipped')) {
-        cardElement.classList.add('flipped');
-        selectedCards.push({ element: cardElement, index });
+function flipCard() {
+    if (flippedCards.length === 2) return;
+    if (this.classList.contains('flipped')) return;
 
-        if (selectedCards.length === 2) {
-            attempts++;
-            scoreElement.innerText = `Intentos: ${attempts}`;
-            setTimeout(checkForMatch, 1000);
-        }
+    this.classList.add('flipped');
+    this.textContent = this.dataset.symbol;
+    flippedCards.push(this);
+
+    if (flippedCards.length === 2) {
+        setTimeout(checkMatch, 1000);
     }
-};
+}
 
-const checkForMatch = () => {
-    const [firstCard, secondCard] = selectedCards;
-    const firstImage = cards[firstCard.index].src;
-    const secondImage = cards[secondCard.index].src;
-
-    if (firstImage === secondImage) {
+function checkMatch() {
+    const [card1, card2] = flippedCards;
+    if (card1.dataset.symbol === card2.dataset.symbol) {
         matchedPairs++;
-        setTimeout(() => showTipPopover(firstCard.element), 500);
-        
-        if (matchedPairs === cards.length / 2) {
-            clearInterval(timer);
+        showEnvironmentalMessage();
+        if (matchedPairs === environmentalPairs.length / 2) {
             setTimeout(() => {
-                alert('¡Felicidades! Has encontrado todos los pares.');
-            }, 1000);
+                showPopover("¡Felicitaciones!", "Has completado el juego y has aprendido valiosas lecciones sobre el cuidado del medio ambiente. ¡Sigamos protegiendo nuestro planeta!");
+            }, 500);
         }
     } else {
-        setTimeout(() => {
-            firstCard.element.classList.remove('flipped');
-            secondCard.element.classList.remove('flipped');
-        }, 1000);
+        card1.classList.remove('flipped');
+        card2.classList.remove('flipped');
+        card1.textContent = '';
+        card2.textContent = '';
     }
-    selectedCards = [];
-};
+    flippedCards = [];
+}
 
-const shuffleCards = (array) => {
-    return array.sort(() => Math.random() - 0.5);
-};
+function showEnvironmentalMessage() {
+    const randomMessage = environmentalMessages[Math.floor(Math.random() * environmentalMessages.length)];
+    showPopover(randomMessage.title, randomMessage.content);
+}
 
-const startGame = () => {
-    closeTipPopover();
-    const selectedLevel = difficultySelect.value;
-    createCards(selectedLevel);
-    resetGame();
-};
+function showPopover(title, content) {
+    const popover = document.getElementById('popover');
+    const overlay = document.getElementById('overlay');
+    
+    popover.querySelector('.popover-title').textContent = title;
+    popover.querySelector('.popover-content').textContent = content;
+    
+    popover.classList.add('show');
+    overlay.classList.add('show');
+}
 
-const resetGame = () => {
-    selectedCards = [];
+function closePopover() {
+    const popover = document.getElementById('popover');
+    const overlay = document.getElementById('overlay');
+    
+    popover.classList.remove('show');
+    overlay.classList.remove('show');
+}
+
+document.getElementById('close-popover').addEventListener('click', closePopover);
+document.getElementById('accept-popover').addEventListener('click', closePopover);
+document.getElementById('overlay').addEventListener('click', closePopover);
+
+document.getElementById('popover').addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+
+document.getElementById('restart-btn').addEventListener('click', () => {
     matchedPairs = 0;
-    attempts = 0;
-    timeElapsed = 0;
-    scoreElement.innerText = 'Intentos: 0';
-    timerElement.innerText = 'Tiempo: 0s';
-    clearInterval(timer);
-    timer = setInterval(() => {
-        timeElapsed++;
-        timerElement.innerText = `Tiempo: ${timeElapsed}s`;
-    }, 1000);
-};
+    flippedCards = [];
+    createBoard();
+});
 
-restartButton.addEventListener('click', startGame);
-difficultySelect.addEventListener('change', startGame);
-
-const adjustGridColumns = () => {
-    const width = window.innerWidth;
-    if (width <= 480) {
-        gameContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
-    } else if (width <= 768) {
-        gameContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
-    } else {
-        gameContainer.style.gridTemplateColumns = 'repeat(auto-fit, minmax(120px, 1fr))';
-    }
-};
-
-window.addEventListener('resize', adjustGridColumns);
-window.onload = () => {
-    startGame();
-    adjustGridColumns();
-};
+// Iniciar juego
+createBoard();
