@@ -139,48 +139,106 @@ h2 {
     gap: 2rem;
 }
 
+/* Modificar/Agregar estas reglas en tu CSS existente */
+
 .project-card {
     background-color: var(--card-bg);
     border-radius: 10px;
     box-shadow: var(--shadow-elevation);
     padding: 2rem;
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+    transition: transform var(--transition-duration) ease, 
+                box-shadow var(--transition-duration) ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     opacity: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.project-card.visible {
-    opacity: 1;
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    transition: width .5s ease, height .5s ease, top .5s ease, left .5s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.project-card:hover::before {
+    width: 200%;
+    height: 200%;
 }
 
 .project-card:hover {
     transform: translateY(-15px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    background-color: var(--accent-color);
-    color: var(--white);
 }
 
-.project-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    transition: transform var(--transition-duration) ease;
-}
-
-.project-card:hover .project-icon {
-    transform: rotate(360deg);
-}
-
-.project-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+.project-card h3,
+.project-card p,
+.project-card .project-icon {
     transition: color var(--transition-duration) ease;
 }
 
-.project-card:hover h3 {
+.project-card:hover h3,
+.project-card:hover p,
+.project-card:hover .project-icon {
     color: var(--white);
+}
+
+/* Mejorar el botón CTA dentro de la tarjeta */
+.project-card .cta-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color var(--transition-duration) ease;
+}
+
+.project-card .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--white);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform .3s ease-out;
+    z-index: -1;
+}
+
+.project-card:hover .cta-button {
+    color: var(--accent-color);
+}
+
+.project-card:hover .cta-button::before {
+    transform: scaleX(1);
+}
+
+/* Mejorar el icono */
+.project-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform .5s ease;
+}
+
+.project-card:hover .project-icon {
+    transform: scale(1.2) rotate(360deg);
+}
+
+.project-card::before {
+    background: 
+        linear-gradient(135deg, var(--accent-color), transparent),
+        linear-gradient(45deg, var(--secondary-color), var(--primary-color));
 }
 
 .cta-button {
