@@ -7,20 +7,31 @@
     <title>SENA COP16 Colombia 2024</title>
     <link rel="shortcut icon" href="./images/Sena_Colombia_logo.svg.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/styles.css"">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href=" https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <nav>
-            <img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" alt="SENA Logo" class="sena-logo" loading="lazy">
-            <ul>
+            <img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" alt="SENA Logo"
+                class="sena-logo" loading="lazy">
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul id="nav-menu" class="nav-menu">
+                <li class="theme-toggle-wrapper">
+                    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+                </li>
                 <li><a href="#home" aria-label="Navigate to home">Home</a></li>
                 <li><a href="#about" aria-label="Navigate to about section">About</a></li>
                 <li><a href="#projects" aria-label="Navigate to projects section">Projects</a></li>
                 <li><a href="#contact" aria-label="Navigate to contact section">Contact</a></li>
             </ul>
-            <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            
         </nav>
         <div class="hero">
             <h1>SENA Students for COP16 Colombia 2024</h1>
@@ -32,7 +43,8 @@
     <main class="container">
         <section id="about" class="intro fade-in">
             <h2>Our Contribution to COP16 Colombia 2024</h2>
-            <p>As students of Software Analysis and Development at SENA, we're proud to present our innovative projects aimed at promoting environmental awareness and sustainability for COP16 Colombia 2024.</p>
+            <p>As students of Software Analysis and Development at SENA, we're proud to present our innovative projects
+                aimed at promoting environmental awareness and sustainability for COP16 Colombia 2024.</p>
         </section>
 
         <section id="projects" class="projects">
@@ -41,25 +53,29 @@
                 <div class="project-card slide-in-left">
                     <div class="project-icon">🌱</div>
                     <h3>Smart Plant Watering System</h3>
-                    <p>An Arduino-based system that detects soil moisture levels and automatically waters plants when needed, promoting water conservation and optimal plant growth.</p>
+                    <p>An Arduino-based system that detects soil moisture levels and automatically waters plants when
+                        needed, promoting water conservation and optimal plant growth.</p>
                     <a href="#" class="cta-button">Learn More</a>
                 </div>
                 <div class="project-card slide-in-left">
                     <div class="project-icon">🧠</div>
                     <h3>Eco-Memory Game</h3>
-                    <p>An interactive web-based memory game that educates players about environmental conservation. Each matched pair reveals an eco-friendly tip, making learning fun and engaging.</p>
+                    <p>An interactive web-based memory game that educates players about environmental conservation. Each
+                        matched pair reveals an eco-friendly tip, making learning fun and engaging.</p>
                     <a href="Games/memory/memory.html" class="cta-button">Play Now</a>
                 </div>
                 <div class="project-card slide-in-left">
                     <div class="project-icon">❓</div>
                     <h3>Environmental Trivia Challenge</h3>
-                    <p>Test your knowledge about climate change, sustainability, and environmental issues with our engaging trivia game, designed to raise awareness and educate players.</p>
+                    <p>Test your knowledge about climate change, sustainability, and environmental issues with our
+                        engaging trivia game, designed to raise awareness and educate players.</p>
                     <a href="#" class="cta-button">Go to the Quiz</a>
                 </div>
                 <div class="project-card slide-in-left">
                     <div class="project-icon">🎮</div>
                     <h3>Eco-Hangman Game</h3>
-                    <p>Challenge yourself with our Eco-Hangman game! Guess eco-friendly words and learn about sustainability while having fun. A great way to expand your environmental vocabulary.</p>
+                    <p>Challenge yourself with our Eco-Hangman game! Guess eco-friendly words and learn about
+                        sustainability while having fun. A great way to expand your environmental vocabulary.</p>
                     <a href="Games/hanged/hanged.html" class="cta-button">Play Eco-Hangman</a>
                 </div>
             </div>
