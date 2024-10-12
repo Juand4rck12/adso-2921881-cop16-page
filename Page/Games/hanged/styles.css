@@ -325,27 +325,6 @@ body.dark-mode .hangman-svg line[stroke="#B6866A"] {
     stroke: #D2B48C;
 }
 
-/* Home link styles */
-.home-link {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin-bottom: 20px;
-}
-
-.home-link:hover {
-    background-color: var(--button-hover-color);
-}
-
-.home-link i {
-    margin-right: 10px;
-}
-
 /* Responsive design */
 @media (max-width: 600px) {
     .container {
