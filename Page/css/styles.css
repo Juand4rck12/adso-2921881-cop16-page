@@ -15,7 +15,6 @@
     --dark-white: #1E1E1E;
     --dark-card-bg: #252525;
 
-    /* Optimization for theme transition */
     --transition-duration: 0.3s;
     --shadow-elevation: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -45,7 +44,6 @@ body.dark-mode {
     --card-bg: var(--dark-card-bg);
 }
 
-/* Optimization: Reduce shadow elevation for better performance */
 header {
     background-color: var(--white);
     color: var(--text-color);
@@ -62,17 +60,17 @@ nav {
     padding: 1rem 5%;
 }
 
-nav ul {
+.nav-menu {
     display: flex;
     list-style: none;
-    flex-wrap: wrap; /* Added for better responsiveness */
+    align-items: center;
 }
 
-nav ul li {
-    margin-left: 2rem;
+.nav-menu li {
+    margin-left: 1.5rem;
 }
 
-nav ul li a {
+.nav-menu a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
@@ -80,8 +78,8 @@ nav ul li a {
     transition: color var(--transition-duration) ease;
 }
 
-nav ul li a:hover {
-    color: var(--primary-color);
+.nav-menu a:hover {
+    text-decoration: underline;
 }
 
 .sena-logo {
@@ -139,15 +137,13 @@ h2 {
     gap: 2rem;
 }
 
-/* Modificar/Agregar estas reglas en tu CSS existente */
-
 .project-card {
     background-color: var(--card-bg);
     border-radius: 10px;
     box-shadow: var(--shadow-elevation);
     padding: 2rem;
-    transition: transform var(--transition-duration) ease, 
-                box-shadow var(--transition-duration) ease;
+    transition: transform var(--transition-duration) ease,
+        box-shadow var(--transition-duration) ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,7 +161,9 @@ h2 {
     left: 50%;
     width: 0;
     height: 0;
-    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    background:
+        linear-gradient(135deg, var(--accent-color), transparent),
+        linear-gradient(45deg, var(--secondary-color), var(--primary-color));
     transition: width .5s ease, height .5s ease, top .5s ease, left .5s ease;
     transform: translate(-50%, -50%);
     z-index: -1;
@@ -194,7 +192,6 @@ h2 {
     color: var(--white);
 }
 
-/* Mejorar el botón CTA dentro de la tarjeta */
 .project-card .cta-button {
     position: relative;
     overflow: hidden;
@@ -224,7 +221,6 @@ h2 {
     transform: scaleX(1);
 }
 
-/* Mejorar el icono */
 .project-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -233,12 +229,6 @@ h2 {
 
 .project-card:hover .project-icon {
     transform: scale(1.2) rotate(360deg);
-}
-
-.project-card::before {
-    background: 
-        linear-gradient(135deg, var(--accent-color), transparent),
-        linear-gradient(45deg, var(--secondary-color), var(--primary-color));
 }
 
 .cta-button {
@@ -272,6 +262,11 @@ footer {
     transition: background-color var(--transition-duration) ease;
 }
 
+.theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 #theme-toggle {
     background-color: transparent;
     border: 2px solid var(--primary-color);
@@ -284,7 +279,10 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color var(--transition-duration) ease, transform var(--transition-duration) ease, color var(--transition-duration) ease, border-color var(--transition-duration) ease;
+    transition: background-color var(--transition-duration) ease,
+        transform var(--transition-duration) ease,
+        color var(--transition-duration) ease,
+        border-color var(--transition-duration) ease;
 }
 
 #theme-toggle:hover {
@@ -305,7 +303,7 @@ body.dark-mode #theme-toggle:hover {
 
 .fade-in {
     opacity: 0;
-    transform: translatesY(20px);
+    transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
@@ -321,29 +319,60 @@ body.dark-mode #theme-toggle:hover {
     transform: translate(0);
 }
 
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
-    nav {
-        flex-wrap: wrap;
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -300px;
+        flex-direction: column;
+        background-color: var(--white);
+        width: 250px;
+        height: calc(100vh - 70px);
+        padding: 20px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     }
 
-    nav ul {
-        order: 3;
-        width: 100%;
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu li {
+        margin: 1rem 0;
+    }
+
+    .theme-toggle-wrapper {
+        margin-left: 0;
         margin-top: 1rem;
-        justify-content: center;
     }
 
-    nav ul li {
-        margin: 0 0.5rem;
-    }
-
-    h1 {
-        font-size: 2.5rem;
+    .menu-toggle {
+        display: block;
     }
 
     .hero {
         padding: 3rem 1rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
     }
 
     .container {
@@ -352,6 +381,35 @@ body.dark-mode #theme-toggle:hover {
 
     h2 {
         font-size: 2rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        position: static;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        padding: 0;
+        box-shadow: none;
+        background-color: transparent;
+    }
+
+    .theme-toggle-wrapper {
+        order: 1;
+        margin-left: 1.5rem;
     }
 }
 
@@ -366,9 +424,39 @@ body.dark-mode #theme-toggle:hover {
 
     .cta-button {
         padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
     }
 
     .project-card {
-        padding: 1.5rem;
+        padding: 1.25rem;
+    }
+
+    .project-icon {
+        font-size: 2.5rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .project-card p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Nuevas media queries para mejorar la responsividad */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (min-width: 1025px) {
+    .container {
+        padding: 5rem 2rem;
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
