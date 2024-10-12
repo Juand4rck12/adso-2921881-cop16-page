@@ -75,11 +75,18 @@ nav {
     text-decoration: none;
     font-weight: 500;
     font-size: 1.2rem;
-    transition: color var(--transition-duration) ease;
+    /* No se como funciona este efecto pero me gusta :D */
+    background: linear-gradient(var(--dark-primary-color) 0 0)
+        no-repeat
+         calc(200% - var(--p, 0%)) 100% / 200% var(--p, 0.10em);
+    transition: 0.3s var(--t, 0s),
+        background-position 0.3s calc(0.3s - var(--t, 0s));
 }
 
 .nav-menu a:hover {
-    text-decoration: underline;
+    --p: 100%;
+    --t: 0.3s;
+    color: #fff;
 }
 
 .sena-logo {
@@ -221,15 +228,26 @@ h2 {
     transform: scaleX(1);
 }
 
+@keyframes rotateIcon {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1.2);
+    }
+}
+
 .project-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
-    transition: transform .5s ease;
+    transition: all .5s ease;
 }
 
 .project-card:hover .project-icon {
-    transform: scale(1.2) rotate(360deg);
+    animation: rotateIcon 0.5s ease;
 }
+
 
 .cta-button {
     display: inline-block;
@@ -327,15 +345,6 @@ body.dark-mode #theme-toggle:hover {
     padding: 10px;
     z-index: 1000;
 }
-
-/* .menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-color);
-    margin: 5px 0;
-    transition: 0.4s;
-} */
 
 .menu-toggle .bar {
     display: block;
