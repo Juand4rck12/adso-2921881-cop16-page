@@ -4,7 +4,10 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #e8f5e9;
+    background: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-color: rgba(197, 197, 197, 0.85);
     margin: 0;
     padding: 20px;
 }
@@ -81,7 +84,7 @@ h1 {
 
 .card {
     aspect-ratio: 1;
-    background-color: #4caf50;
+    background-color: #35d63a;
     border-radius: 10px;
     display: flex;
     justify-content: center;

@@ -15,7 +15,10 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color);
+    background: url('https://images.unsplash.com/photo-1535320404287-416e2c6d2b41?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-color: rgba(34, 49, 63, 0.85); /* Oscurecemos el fondo para mejorar la legibilidad */
     color: var(--text-color);
     line-height: 1.6;
     display: flex;
@@ -81,11 +84,13 @@ body {
 }
 
 .hero {
-    background-color: var(--secondary-color);
+    background: rgba(0, 50, 77, 0.7); /* Fondo semitransparente */
     color: var(--white);
     text-align: center;
     align-items: center;
-    padding: 25px 0;
+    padding: 30px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -94,21 +99,37 @@ h1 {
 }
 
 .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     flex: 1;
-    padding: 50px 0;
+    padding: 20px;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .video-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Aspect ratio 16:9 */
 }
 
-#video-ia {
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: block;
+    height: 100%;
+    border-radius: 8px;
 }
 
 footer {
@@ -125,10 +146,6 @@ footer {
 
     h1 {
         font-size: 1.8em;
-    }
-
-    .video-wrapper {
-        width: 95%;
     }
 
     .home-btn {
@@ -162,5 +179,9 @@ footer {
 
     .logo {
         height: 30px;
+    }
+
+    .video-container {
+        padding: 10px;
     }
 }
