@@ -41,7 +41,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('/Page/images/cop16-background.jpg') center/cover;
+    background: url('../images/cop16-background.jpg') center/cover;
     opacity: 0.1;
     z-index: -1;
     pointer-events: none;
@@ -121,7 +121,7 @@ nav {
     text-align: center;
     padding: 5rem 1rem;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('/Page/images/image-back.jpg') center/cover;
+                url('../images/image-back.jpg') center/cover;
     color: #FFFFFF;
     position: relative;
     overflow: hidden;
