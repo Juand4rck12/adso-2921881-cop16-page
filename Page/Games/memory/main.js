@@ -5,36 +5,35 @@ const environmentalPairs = [
 
 const environmentalMessages = [
     {
-        title: "Plantación de Árboles",
-        content: "Un solo árbol puede absorber hasta 22 kg de CO2 al año y proporcionar oxígeno para 2 personas. La reforestación urbana reduce la temperatura local hasta 2°C y aumenta la biodiversidad en un 30%."
+        title: "Tree Planting",
+        content: "A single tree can absorb up to 22 kg of CO2 per year and provide oxygen for 2 people. Urban reforestation reduces local temperatures by up to 2°C and increases biodiversity by 30%."
     },
     {
-        title: "Energías Renovables",
-        content: "Instalar paneles solares puede reducir tu huella de carbono hasta en un 80%. Una casa con energía solar evita la emisión de 3-4 toneladas de CO2 anualmente, equivalente a plantar 100 árboles."
+        title: "Renewable Energies",
+        content: "Installing solar panels can reduce your carbon footprint by up to 80%. A house with solar energy avoids the emission of 3-4 tons of CO2 annually, equivalent to planting 100 trees."
     },
     {
-        title: "Reciclaje Efectivo",
-        content: "Reciclar una tonelada de papel salva 17 árboles y 26,000 litros de agua. Separar correctamente los residuos puede reducir hasta un 80% la basura que llega a los vertederos. Un teléfono móvil reciclado ahorra metales equivalentes a 24 kg de oro."
+        title: "Effective Recycling",
+        content: "Recycling one ton of paper saves 17 trees and 26,000 liters of water. Correctly separating waste can reduce up to 80% of the garbage that reaches landfills. A recycled mobile phone saves metals equivalent to 24 kg of gold."    },
+    {
+        title: "Water Conservation",
+        content: "Turning off the tap while brushing your teeth saves up to 12 liters per minute. A leak of one drop per second wastes 30 liters per day. Using an efficient shower head can save 11,000 liters of water per person per year."
     },
     {
-        title: "Conservación del Agua",
-        content: "Cerrar el grifo mientras te cepillas los dientes ahorra hasta 12 litros por minuto. Una fuga de una gota por segundo desperdicia 30 litros al día. Usar un cabezal de ducha eficiente puede ahorrar 11,000 litros de agua por persona al año."
+        title: "Local and Sustainable Consumption",
+        content: "Local foods are up to 17% fresher and reduce transportation emissions. Buying seasonal products reduces your carbon footprint by 10% and supports local farmers, strengthening the community economy."
     },
     {
-        title: "Consumo Local y Sostenible",
-        content: "Los alimentos locales son hasta un 17% más frescos y reducen las emisiones de transporte. Comprar productos de temporada reduce la huella de carbono en un 10% y apoya a los agricultores locales, fortaleciendo la economía de la comunidad."
+        title: "Energy Efficiency",
+        content: "LED bulbs use up to 75% less energy and last 25 times longer than incandescent bulbs. You can save $75 a year per bulb. Setting your thermostat 1°C lower in winter reduces energy consumption by 10% "
     },
     {
-        title: "Eficiencia Energética",
-        content: "Las bombillas LED usan hasta un 75% menos de energía y duran 25 veces más que las incandescentes. Puedes ahorrar $75 al año por bombilla. Configurar el termostato 1°C más bajo en invierno reduce el consumo de energía en un 10%."
+        title: "Sustainable Transportation",
+        content: "Riding a bicycle 10 km a day saves 1.5 tons of CO2 per year. Using public transport can reduce your carbon footprint by 2.6 tons per year. Carpooling to work reduces emissions and traffic by up to 20%."
     },
     {
-        title: "Transporte Sostenible",
-        content: "Andar en bicicleta 10 km al día ahorra 1.5 toneladas de CO2 al año. Usar transporte público puede reducir tu huella de carbono en 2.6 toneladas anuales. Compartir coche al trabajo disminuye las emisiones y el tráfico en hasta un 20%."
-    },
-    {
-        title: "Alimentación Consciente",
-        content: "Reducir el consumo de carne un día a la semana puede disminuir tu huella de carbono en un 8%. La producción de carne utiliza 20 veces más tierra y 6 veces más agua que las proteínas vegetales. Una dieta basada en plantas puede ahorrar 1,100 litros de agua por día."
+        title: "Conscious Eating",
+        content: "Reducing meat consumption one day a week can reduce your carbon footprint by 8%. Meat production uses 20 times more land and 6 times more water than plant proteins. A plant-based diet can save 1,100 liters of water per day."
     }
 ];
 

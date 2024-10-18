@@ -17,7 +17,10 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color);
+    background: url('https://exytures.com.co/wp-content/uploads/2023/07/iStock-1201456158-1290x540.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-color: rgb(221, 221, 221);
     color: var(--text-color);
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
@@ -28,6 +31,8 @@ body {
 
 .container {
     max-width: 800px;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin: 0 auto;
     padding: 20px;
     flex-grow: 1;

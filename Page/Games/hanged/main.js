@@ -1,54 +1,43 @@
-const wordList = [
-    { word: 'BIODIVERSIDAD', hint: 'Variedad de vida en la Tierra' },
-    { word: 'CONSERVACION', hint: 'Protección de la naturaleza' },
-    { word: 'ECOLOGIA', hint: 'Ciencia que estudia las interacciones entre organismos y su ambiente' },
-    { word: 'MEDIOAMBIENTE', hint: 'Entorno natural que rodea a los seres vivos' },
-    { word: 'ECOSISTEMA', hint: 'Comunidad de seres vivos y su entorno' },
-    { word: 'SUSTENTABILIDAD', hint: 'Capacidad de mantenerse sin agotar los recursos' },
-    { word: 'CLIMATICO', hint: 'Relacionado con las condiciones atmosféricas a largo plazo' },
-    { word: 'RECURSOS', hint: 'Materiales naturales que se pueden utilizar' },
-    { word: 'NATURAL', hint: 'Relacionado con la naturaleza, no artificial' },
-    { word: 'BIOSFERA', hint: 'Capa de la Tierra donde se desarrolla la vida' },
-    { word: 'CLIMA', hint: 'Conjunto de condiciones atmosféricas características de una zona' },
-    { word: 'SOSTENIBILIDAD', hint: 'Uso responsable de recursos naturales' },
-    { word: 'ESPECIES', hint: 'Grupos de organismos similares capaces de reproducirse entre sí' },
-    { word: 'HABITAT', hint: 'Lugar donde vive naturalmente un organismo' },
-    { word: 'AMBIENTE', hint: 'Entorno que rodea a los seres vivos' },
-    { word: 'NATURALEZA', hint: 'Mundo físico y sus fenómenos' },
-    { word: 'PROTECCION', hint: 'Acción de cuidar y preservar' }
-];
+const wordList = [{ word: 'BIODIVERSITY', hint: 'Variety of life on Earth' },
+{ word: 'CONSERVATION', hint: 'Nature protection' },
+{ word: 'ECOLOGY', hint: 'Science that studies the interactions between organisms and their environment' },
+{ word: 'ENVIRONMENT', hint: 'Natural environment that surrounds living beings' },
+{ word: 'ECOSYSTEM', hint: 'Community of living beings and their environment' },
+{ word: 'SUSTAINABILITY', hint: 'Ability to maintain itself without depleting resources' },
+{ word: 'CLIMATIC', hint: 'Related to long-term atmospheric conditions' },
+{ word: 'RESOURCES', hint: 'Natural materials that can be used' },
+{ word: 'NATURAL', hint: 'Related to nature, not artificial' },
+{ word: 'BIOSPHERE', hint: 'Layer of the Earth where life develops' },
+{ word: 'CLIMATE', hint: 'Set of atmospheric conditions characteristic of an area' },
+{ word: 'SUSTAINABILITY', hint: 'Responsible use of natural resources' },
+{ word: 'SPECIES', hint: 'Groups of similar organisms capable of reproducing with each other' },
+{ word: 'HABITAT', hint: 'Place where an organism naturally lives' },
+{ word: 'ENVIRONMENT', hint: 'Environment that surrounds living beings' },
+{ word: 'NATURE', hint: 'Physical world and its phenomena' },
+{ word: 'PROTECTION', hint: 'Action of caring and preserving' }];
 
 const environmentalMessages = [
     {
-        title: "Protege la Biodiversidad",
-        content: "La biodiversidad es esencial para la vida en la Tierra. Cada especie juega un papel crucial en el equilibrio de los ecosistemas."
+        title: "Protect Biodiversity",
+        content: "Biodiversity is essential for life on Earth. Each species plays a crucial role in the balance of ecosystems."
     },
     {
-        title: "Conserva los Recursos Naturales",
-        content: "El uso responsable de los recursos naturales asegura su disponibilidad para las generaciones futuras y protege los hábitats naturales."
+        title: "Conserve Natural Resources",
+        content: "The responsible use of natural resources ensures their availability for future generations and protects natural habitats."
     },
     {
-        title: "Lucha contra el Cambio Climático",
-        content: "Reducir nuestra huella de carbono es crucial para mitigar los efectos del cambio climático y proteger nuestro planeta."
+        title: "Fight against Climate Change",
+        content: "Reducing our carbon footprint is crucial to mitigate the effects of climate change and protect our planet."
     },
     {
-        title: "Practica la Sostenibilidad",
-        content: "Adoptar prácticas sostenibles en nuestra vida diaria puede tener un impacto significativo en la preservación del medio ambiente."
+        title: "Practice Sustainability",
+        content: "Adopting sustainable practices in our daily lives can have a significant impact on preserving the environment."
     },
     {
-        title: "Educa sobre el Medio Ambiente",
-        content: "La educación ambiental es clave para crear conciencia y fomentar acciones que protejan nuestro planeta."
+        title: "Educate about the Environment",
+        content: "Environmental education is key to raising awareness and promoting actions that protect our planet."
     }
 ];
-
-let game = {
-    selectedWord: '',
-    selectedHint: '',
-    guessedLetters: [],
-    remainingTries: 6,
-    score: 0,
-    gameActive: false
-};
 
 const hangmanParts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
 
@@ -123,14 +112,14 @@ function updateWordDisplay() {
 function updateTriesLeft() {
     const triesLeftElement = document.getElementById('tries-left');
     if (triesLeftElement) {
-        triesLeftElement.textContent = `Intentos restantes: ${game.remainingTries}`;
+        triesLeftElement.textContent = `Remaining attempts: ${game.remainingTries}`;
         triesLeftElement.classList.add('fade-in');
     }
 }
 
 function updateScore() {
     const scoreElement = document.getElementById('score');
-    scoreElement.textContent = `Puntuación: ${game.score}`;
+    scoreElement.textContent = `Score: ${game.score}`;
     scoreElement.classList.add('fade-in');
 }
 
