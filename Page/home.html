@@ -6,97 +6,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENA COP16 Colombia 2024</title>
     <link rel="shortcut icon" href="./images/Sena_Colombia_logo.svg.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/styles.css"">
-    <link href=" https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <div class="nature-background"></div>
+    
     <header>
         <nav>
-            <img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" alt="SENA Logo"
-                class="sena-logo" loading="lazy">
+            <div class="logo-container">
+                <img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" alt="SENA Logo"
+                    class="sena-logo" loading="lazy">
+                <img src="./images/LOGO-COP16-e1727822559894.png" alt="COP16 Logo" class="cop16-logo" loading="lazy">
+            </div>
 
             <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
                 <span class="bar bar1"></span>
                 <span class="bar bar2"></span>
                 <span class="bar bar3"></span>
             </button>
-            
+
             <ul id="nav-menu" class="nav-menu">
                 <li class="theme-toggle-wrapper">
                     <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
                 </li>
-                <li><a href="#home" aria-label="Navigate to home">Home</a></li>
-                <li><a href="#about" aria-label="Navigate to about section">About</a></li>
-                <li><a href="#projects" aria-label="Navigate to projects section">Projects</a></li>
-                <li><a href="#contact" aria-label="Navigate to contact section">Contact</a></li>
+                <li><a href="#home">🏠 Home</a></li>
+                <li><a href="#about">🌿 About</a></li>
+                <li><a href="#projects">🌱 Projects</a></li>
             </ul>
-            
         </nav>
+
         <div class="hero">
             <h1>SENA Students for COP16 Colombia 2024</h1>
-            <p>Software Analysis and Development - Class 2921881</p>
-            <a href="#projects" class="cta-button">Explore Our Projects</a>
+            <p>Preserving Biodiversity Through Technology</p>
+            <p class="subtitle">Software Analysis and Development - Class 2921881</p>
+            <a href="#projects" class="cta-button">Explore Our Eco Projects</a>
         </div>
     </header>
 
     <main class="container">
-        <section id="about" class="intro fade-in">
-            <h2>Our Contribution to COP16 Colombia 2024</h2>
-            <p>As students of Software Analysis and Development at SENA, we're proud to present our innovative projects
-                aimed at promoting environmental awareness and sustainability for COP16 Colombia 2024.</p>
+        <section id="about" class="intro fade-in parallax-section">
+            <div class="intro-content">
+                <h2>🌍 Our Contribution to COP16 Colombia 2024</h2>
+                <p>As students of Software Analysis and Development at SENA, we're committed to developing innovative
+                    solutions that support biodiversity conservation and environmental sustainability. Our projects align
+                    with COP16's mission to protect and preserve Earth's precious ecosystems.</p>
+            </div>
+            <div class="nature-divider"></div>
         </section>
 
         <section id="projects" class="projects">
-            <h2 class="fade-in">Our Projects</h2>
+            <h2 class="fade-in">🌿 Our Environmental Projects</h2>
             <div class="project-grid">
                 <div class="project-card slide-in-left">
                     <div class="project-icon">🌱</div>
-                    <h3>Smart Plant Watering System</h3>
-                    <p>An Arduino-based system that detects soil moisture levels and automatically waters plants when
-                        needed, promoting water conservation and optimal plant growth.</p>
+                    <h3>Smart Plant Monitoring</h3>
+                    <p>An IoT-based system that monitors plant health, soil conditions, and local biodiversity, helping
+                        preserve native species.</p>
                     <a href="#" class="cta-button">Learn More</a>
                 </div>
+
                 <div class="project-card slide-in-left">
-                    <div class="project-icon">🧠</div>
-                    <h3>Eco-Memory Game</h3>
-                    <p>An interactive web-based memory game that educates players about environmental conservation. Each
-                        matched pair reveals an eco-friendly tip, making learning fun and engaging.</p>
+                    <div class="project-icon">🦋</div>
+                    <h3>Biodiversity Memory Game</h3>
+                    <p>Learn about local Colombian species and ecosystems through our interactive memory game. Each match
+                        reveals fascinating facts about our natural heritage.</p>
                     <a href="Games/memory/memory.html" class="cta-button">Play Now</a>
                 </div>
+
                 <div class="project-card slide-in-left">
-                    <div class="project-icon">❓</div>
-                    <h3>Environmental Trivia Challenge</h3>
-                    <p>Test your knowledge about climate change, sustainability, and environmental issues with our
-                        engaging trivia game, designed to raise awareness and educate players.</p>
-                    <a href="#" class="cta-button">Go to the Quiz</a>
+                    <div class="project-icon">🌳</div>
+                    <h3>Ecosystem Trivia</h3>
+                    <p>Test your knowledge about Colombia's unique biodiversity, conservation efforts, and environmental
+                        challenges.</p>
+                    <a href="#" class="cta-button">Start Quiz</a>
                 </div>
+
                 <div class="project-card slide-in-left">
-                    <div class="project-icon">🎮</div>
-                    <h3>Eco-Hangman Game</h3>
-                    <p>Challenge yourself with our Eco-Hangman game! Guess eco-friendly words and learn about
-                        sustainability while having fun. A great way to expand your environmental vocabulary.</p>
-                    <a href="Games/hanged/hanged.html" class="cta-button">Play Eco-Hangman</a>
+                    <div class="project-icon">🦜</div>
+                    <h3>Wildlife Hangman</h3>
+                    <p>Discover endangered species and learn about conservation efforts while playing our eco-themed
+                        hangman game.</p>
+                    <a href="Games/hanged/hanged.html" class="cta-button">Play Now</a>
                 </div>
+
                 <div class="project-card slide-in-left">
                     <div class="project-icon">🤖</div>
-                    <h3>Personalized video with AI</h3>
-                    <p>Explore the future of content creation with our AI-generated video. Witness how artificial
-                        intelligence can craft stunning visuals and narratives, pushing the boundaries of creativity.</p>
-                    <a href="#" class="cta-button">Play video</a>
+                    <h3>AI Wildlife Detection</h3>
+                    <p>Experience how AI technology can help identify and track wildlife, supporting conservation
+                        efforts in Colombia's diverse ecosystems.</p>
+                    <a href="/Page/sections/IA-video/video-IA.html" class="cta-button">Watch Demo</a>
                 </div>
+
                 <div class="project-card slide-in-left">
-                    <div class="project-icon">💸</div>
-                    <h3>Eco-Millionaire Challenge</h3>
-                    <p>Test your environmental knowledge with our Eco-Millionaire Challenge! Answer questions about climate change, sustainability, and conservation to win virtual prizes and become an eco-expert.</p>
-                    <a href="#" class="cta-button">Play game</a>
+                    <div class="project-icon">🌿</div>
+                    <h3>Eco-Champion Challenge</h3>
+                    <p>Become an environmental expert by answering questions about biodiversity, conservation, and
+                        sustainable practices in Colombia.</p>
+                    <a href="#" class="cta-button">Start Challenge</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="fade-in">
-        <p>&copy; 2024 SENA Students - Software Analysis and Development (Class 2921881). All rights reserved.</p>
+        <p>🌿 Contributing to biodiversity conservation through technology</p>
+        <p>&copy; 2024 SENA Students - Software Analysis and Development (Class 2921881)</p>
     </footer>
 
     <script src="./js/main.js"></script>
