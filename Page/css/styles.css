@@ -32,6 +32,19 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+    position: relative;
+}
+
+.nature-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/Page/images/cop16-background.jpg') center/cover;
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
 }
 
 body.dark-mode {
@@ -58,6 +71,13 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .nav-menu {
@@ -75,12 +95,8 @@ nav {
     text-decoration: none;
     font-weight: 500;
     font-size: 1.2rem;
-    /* No se como funciona este efecto pero me gusta :D */
-    background: linear-gradient(var(--dark-primary-color) 0 0)
-        no-repeat
-         calc(200% - var(--p, 0%)) 100% / 200% var(--p, 0.10em);
-    transition: 0.3s var(--t, 0s),
-        background-position 0.3s calc(0.3s - var(--t, 0s));
+    background: linear-gradient(var(--primary-color) 0 0) no-repeat calc(200% - var(--p, 0%)) 100% / 200% var(--p, 0.10em);
+    transition: 0.3s var(--t, 0s), background-position 0.3s calc(0.3s - var(--t, 0s));
 }
 
 .nav-menu a:hover {
@@ -95,29 +111,35 @@ nav {
     transition: transform var(--transition-duration) ease;
 }
 
+.cop16-logo {
+    width: 80px;
+    height: auto;
+    margin-left: 20px;
+}
+
 .hero {
     text-align: center;
     padding: 5rem 1rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    transition: background-size var(--transition-duration) ease;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('/Page/images/image-back.jpg') center/cover;
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform var(--transition-duration) ease;
+.hero h1, .hero p {
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .intro {
@@ -131,6 +153,10 @@ h2 {
     color: var(--secondary-color);
     margin-bottom: 1rem;
     font-size: 2.5rem;
+}
+
+.dark-mode h2 {
+    color: var(--dark-text-color);
 }
 
 .projects h2 {
@@ -150,7 +176,7 @@ h2 {
     box-shadow: var(--shadow-elevation);
     padding: 2rem;
     transition: transform var(--transition-duration) ease,
-        box-shadow var(--transition-duration) ease;
+                box-shadow var(--transition-duration) ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -159,6 +185,11 @@ h2 {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    border: 2px solid var(--primary-color);
+}
+
+.dark-mode .project-card {
+    border-color: var(--dark-primary-color);
 }
 
 .project-card::before {
@@ -168,9 +199,8 @@ h2 {
     left: 50%;
     width: 0;
     height: 0;
-    background:
-        linear-gradient(135deg, var(--accent-color), transparent),
-        linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    background: linear-gradient(135deg, var(--accent-color), transparent),
+                linear-gradient(45deg, var(--secondary-color), var(--primary-color));
     transition: width .5s ease, height .5s ease, top .5s ease, left .5s ease;
     transform: translate(-50%, -50%);
     z-index: -1;
@@ -187,57 +217,6 @@ h2 {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.project-card h3,
-.project-card p,
-.project-card .project-icon {
-    transition: color var(--transition-duration) ease;
-}
-
-.project-card:hover h3,
-.project-card:hover p,
-.project-card:hover .project-icon {
-    color: var(--white);
-}
-
-.project-card .cta-button {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color var(--transition-duration) ease;
-}
-
-.project-card .cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--white);
-    transform: scaleX(0);
-    transform-origin: 0 50%;
-    transition: transform .3s ease-out;
-    z-index: -1;
-}
-
-.project-card:hover .cta-button {
-    color: var(--accent-color);
-}
-
-.project-card:hover .cta-button::before {
-    transform: scaleX(1);
-}
-
-@keyframes rotateIcon {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg) scale(1.2);
-    }
-}
-
 .project-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -248,7 +227,6 @@ h2 {
     animation: rotateIcon 0.5s ease;
 }
 
-
 .cta-button {
     display: inline-block;
     background-color: var(--primary-color);
@@ -257,18 +235,21 @@ h2 {
     border-radius: 5px;
     text-decoration: none;
     margin-top: 1rem;
-    transition: background-color var(--transition-duration) ease, transform var(--transition-duration) ease, color var(--transition-duration) ease;
+    transition: background-color var(--transition-duration) ease,
+                transform var(--transition-duration) ease,
+                color var(--transition-duration) ease;
     font-weight: 500;
+    z-index: 2;
+}
+
+.dark-mode .cta-button {
+    background-color: var(--dark-primary-color);
+    color: var(--white);
 }
 
 .cta-button:hover {
     background-color: var(--secondary-color);
     transform: scale(1.05);
-}
-
-.project-card:hover .cta-button {
-    background-color: var(--white);
-    color: var(--accent-color);
 }
 
 footer {
@@ -277,7 +258,8 @@ footer {
     text-align: center;
     padding: 1.5rem 0;
     margin-top: 3rem;
-    transition: background-color var(--transition-duration) ease;
+    position: relative;
+    z-index: 2;
 }
 
 .theme-toggle-wrapper {
@@ -297,10 +279,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color var(--transition-duration) ease,
-        transform var(--transition-duration) ease,
-        color var(--transition-duration) ease,
-        border-color var(--transition-duration) ease;
+    transition: all var(--transition-duration) ease;
 }
 
 #theme-toggle:hover {
@@ -309,16 +288,17 @@ footer {
     transform: scale(1.1);
 }
 
-body.dark-mode #theme-toggle {
+.dark-mode #theme-toggle {
     border-color: var(--dark-accent-color);
     color: var(--dark-accent-color);
 }
 
-body.dark-mode #theme-toggle:hover {
+.dark-mode #theme-toggle:hover {
     background-color: var(--dark-accent-color);
     color: var(--dark-background-color);
 }
 
+/* Animaciones */
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -337,13 +317,14 @@ body.dark-mode #theme-toggle:hover {
     transform: translate(0);
 }
 
+/* Menú hamburguesa */
 .menu-toggle {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    z-index: 1000;
+    z-index: 1100;
 }
 
 .menu-toggle .bar {
@@ -371,15 +352,20 @@ body.dark-mode #theme-toggle:hover {
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
-        top: 70px;
+        top: 0;
         right: -300px;
         flex-direction: column;
         background-color: var(--white);
         width: 250px;
-        height: calc(100vh - 70px);
-        padding: 20px;
+        height: 100vh;
+        padding: 80px 20px 20px;
         transition: right 0.3s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1050;
+    }
+
+    .dark-mode .nav-menu {
+        background-color: var(--dark-background-color);
     }
 
     .nav-menu.active {
@@ -401,10 +387,12 @@ body.dark-mode #theme-toggle:hover {
 
     .hero {
         padding: 3rem 1rem;
+        position: relative;
+        z-index: 1;
     }
 
     h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .container {
@@ -422,36 +410,29 @@ body.dark-mode #theme-toggle:hover {
     .project-card {
         padding: 1.5rem;
     }
-}
 
-@media (min-width: 769px) {
-    .menu-toggle {
-        display: none;
+    .logo-container {
+        gap: 10px;
     }
 
-    .nav-menu {
-        position: static;
-        flex-direction: row;
-        width: auto;
-        height: auto;
-        padding: 0;
-        box-shadow: none;
-        background-color: transparent;
-    }
-
-    .theme-toggle-wrapper {
-        order: 1;
-        margin-left: 1.5rem;
+    .cop16-logo {
+        width: 60px;
     }
 }
 
+/* Ajustes adicionales para pantallas pequeñas */
 @media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
+    .hero h1 {
+        font-size: 1.75rem;
     }
 
     .sena-logo {
         width: 60px;
+    }
+
+    .cop16-logo {
+        width: 50px;
+        margin-left: 10px;
     }
 
     .cta-button {
@@ -476,19 +457,11 @@ body.dark-mode #theme-toggle:hover {
     }
 }
 
-/* Nuevas media queries para mejorar la responsividad */
-@media (min-width: 481px) and (max-width: 1024px) {
-    .project-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+@keyframes rotateIcon {
+    from {
+        transform: rotate(0deg);
     }
-}
-
-@media (min-width: 1025px) {
-    .container {
-        padding: 5rem 2rem;
-    }
-
-    .project-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    to {
+        transform: rotate(360deg) scale(1.2);
     }
 }
