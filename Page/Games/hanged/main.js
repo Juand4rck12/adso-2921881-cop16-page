@@ -187,7 +187,7 @@ function checkWin() {
 function checkLoss() {
     if (game.remainingTries === 0) {
         game.gameActive = false;
-        showPopover("¡Juego terminado!", `La palabra era: ${game.selectedWord}. ¡Sigue aprendiendo sobre el medio ambiente y vuelve a intentarlo!`);
+        showPopover("Game Over!", `The word was: ${game.selectedWord}. ¡Keep learning about the environment and try again!`);
     }
 }
 
